@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 
 namespace ConsoleApplication1
 {
     class Program
-    {        
+    {
         public static string x;
         private static readonly Object O = new object();
         static void Main(string[] args)
         {
+            Console.WriteLine(GeneratePassword(4, 2, 1, 1));
             int[] q = { 0, 1, 2, 3, 4 };
             int[] r = { 5, 6, 7, 8, 9 };
-            int[] res = MergedArray(q,r);
+            int[] res = MergedArray(q, r);
             foreach (int item in res)
             {
                 Console.WriteLine(item.ToString());
@@ -96,19 +94,19 @@ namespace ConsoleApplication1
 
             //return default(T);
         }
-        
-        static double SquareRoot(int number) 
+
+        static double SquareRoot(int number)
         {
             double t;
- 
+
             double squareRoot = number / 2;
- 
-            do 
+
+            do
             {
                 t = squareRoot;
                 squareRoot = (t + (number / t)) / 2;
             } while ((t - squareRoot) != 0);
- 
+
             return squareRoot;
         }
 
@@ -135,14 +133,15 @@ namespace ConsoleApplication1
                 return factorialValue;
             }
 
-            return Factorial(num, factorialValue); }
+            return Factorial(num, factorialValue);
+        }
 
         static int Test(int x) => x * 6;
 
         static void PrintPiramid(int num)
         {
-            int count = num-1;
-            for(int i=1; i <= num; i++)
+            int count = num - 1;
+            for (int i = 1; i <= num; i++)
             {
                 for (int j = 1; j <= count; j++)
                 {
@@ -150,7 +149,7 @@ namespace ConsoleApplication1
                     Write(" ");
                 }
                 count--;
-                for (int j = 1; j<=2*i-1; j++)
+                for (int j = 1; j <= 2 * i - 1; j++)
                 {
                     //Write(" ");
                     Write("*");
@@ -159,15 +158,15 @@ namespace ConsoleApplication1
             }
 
             count = 1;
-            for (int i = 1; i <=num-1; i++)
+            for (int i = 1; i <= num - 1; i++)
             {
-                for (int j = 1; j <=count; j++)
+                for (int j = 1; j <= count; j++)
                 {
                     //Write(" ");
                     Write(" ");
                 }
 
-                for (int j = 1; j <=2*(num-i)-1; j++)
+                for (int j = 1; j <= 2 * (num - i) - 1; j++)
                 {
                     //Write(" ");
                     Write("*");
@@ -176,7 +175,7 @@ namespace ConsoleApplication1
             }
         }
 
-        static int[] DoIntersection(int[] array1,int[] array2)
+        static int[] DoIntersection(int[] array1, int[] array2)
         {
             int[] result = new int[array1.Length];
             int counter = 0;
@@ -191,9 +190,9 @@ namespace ConsoleApplication1
             return result;
         }
 
-        static int[] MergedArray(int[] array1,int[] array2)
+        static int[] MergedArray(int[] array1, int[] array2)
         {
-            if ((array1 != null && array2!=null) && (array1.Length>0 && array2.Length > 0))
+            if ((array1 != null && array2 != null) && (array1.Length > 0 && array2.Length > 0))
             {
                 int index1 = 0;
                 int index2 = 0;
@@ -201,7 +200,7 @@ namespace ConsoleApplication1
                 int[] mergedArray = new int[totalLength];
                 for (int i = 0; i < totalLength; i++)
                 {
-                    if (index1 < (array1.Length-1))
+                    if (index1 < (array1.Length - 1))
                     {
                         index1++;
                     }
@@ -209,10 +208,10 @@ namespace ConsoleApplication1
                     {
                         index2++;
                     }
-                    if (array1[index1]<array2[index2])
+                    if (array1[index1] < array2[index2])
                     {
                         mergedArray[i] = array1[index1];
-                       
+
                     }
                     else
                     {
@@ -225,47 +224,47 @@ namespace ConsoleApplication1
 
             return null;
         }
-        
-    static string GeneratePassword(int lowercase, int uppercase, int numerics, int special) 
-    {
-    string lowers = "abcdefghijklmnopqrstuvwxyz";
-    string uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    string number = "0123456789";
-    string specials = "!@^&%$#*{+}-=?_";  
 
-    Random random = new Random();
+        static string GeneratePassword(int lowercase, int uppercase, int numerics, int special)
+        {
+            string lowers = "abcdefghijklmnopqrstuvwxyz";
+            string uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string number = "0123456789";
+            string specials = "!@^&%$#*{+}-=?_";
 
-    string generated = "!";
-    for (int i = 1; i <= lowercase; i++)
-        generated = generated.Insert(
-            random.Next(generated.Length), 
-            lowers[random.Next(lowers.Length - 1)].ToString()
-        );
+            Random random = new Random();
 
-    for (int i = 1; i <= uppercase; i++)
-        generated = generated.Insert(
-            random.Next(generated.Length), 
-            uppers[random.Next(uppers.Length - 1)].ToString()
-        );
+            string generated = string.Empty;
+            for (int i = 1; i <= lowercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    lowers[random.Next(lowers.Length - 1)].ToString()
+                );
 
-    for (int i = 1; i <= numerics; i++)
-        generated = generated.Insert(
-            random.Next(generated.Length), 
-            number[random.Next(number.Length - 1)].ToString()
-        );
-        
-    for (int i = 1; i <= special; i++)
-        generated = generated.Insert(
-            random.Next(generated.Length), 
-            specials[random.Next(specials.Length - 1)].ToString()
-        );
+            for (int i = 1; i <= uppercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    uppers[random.Next(uppers.Length - 1)].ToString()
+                );
 
-    return generated;
+            for (int i = 1; i <= numerics; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    number[random.Next(number.Length - 1)].ToString()
+                );
 
-}
-}
+            for (int i = 1; i <= special; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    specials[random.Next(specials.Length - 1)].ToString()
+                );
 
-    class Test:BaseClass
+            return generated;
+
+        }
+    }
+
+    class Test : BaseClass
     {
         string x = "global";
         private readonly string t = "xxx";
