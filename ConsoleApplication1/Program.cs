@@ -5,12 +5,31 @@ using static System.Console;
 
 namespace ConsoleApplication1
 {
+    public delegate T MyGeneicDelegate<T, T1, T2>(T1 var1, T2 var2);
+    public delegate T MyGeneicDelegate<T, T1, T2, T3>(T1 var1, T2 var2, T3 var3);
+    public delegate T MyGeneicDelegate<T, T1, T2, T3, T4>(T1 var1, T2 var2, T3 var3, T4 var4);
+    public delegate T MyGeneicDelegate<T, T1, T2, T3, T4, T5>(T1 var1, T2 var2, T3 var3, T4 var4, T5 var5);
     class Program
     {
+
+        MyGeneicDelegate<string, int, int> obj = new MyGeneicDelegate<string, int, int>(ForDelegateTest);
         public static string x;
         private static readonly Object O = new object();
         static void Main(string[] args)
         {
+            string encrypted = Encryption.Encrypt("Hitendra", true);
+            Console.WriteLine(encrypted);
+            string decrypted = Encryption.Decrypt(encrypted, true);
+            Console.WriteLine(decrypted);
+
+            Func<int, string, bool> ob = (int x1, string s) => s.Length > x1;
+            ob(5, "Hello");
+            Action<string, int> ob1 = (string x2, int s2) => Console.WriteLine($"{x2} and {s2.ToString()}");
+            ob1("Test", 5);
+            Test<int>(1); // this will work
+            //Test<string>(""); Will not permitted since the T is struct
+            Class1 c11 = new Class1();
+            Console.WriteLine(c11.Test<float>(5.2f, 1.6f));
             Console.WriteLine(GeneratePassword(4, 2, 1, 1));
             int[] q = { 0, 1, 2, 3, 4 };
             int[] r = { 5, 6, 7, 8, 9 };
@@ -68,6 +87,14 @@ namespace ConsoleApplication1
 
         }
 
+        static string Test<T>(T a) where T : struct
+        {
+            return string.Empty;
+        }
+        static string ForDelegateTest(int a, int b)
+        {
+            return "";
+        }
         static void SomeMethod(DataTable dt)
         {
             dt.Rows[0]["Name"] = "Jitendra";

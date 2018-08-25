@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
@@ -46,21 +42,30 @@ namespace ConsoleApplication1
 
         }
 
-        public T? Test<T>(T? x,T? y) where T: struct
+        public string Add(int[] a, int b)
         {
-            return null;
+            return "";
         }
 
-        public void Test1<T>(T? x, T? y) where T:struct
+        public T? Test<T>(T? x, T? y) where T : struct
         {
-            
+            int? a = Convert.ToInt32(x);
+            int? b = Convert.ToInt32(y);
+            int? result = a * b;
+            T? c = (T)Convert.ChangeType(result, typeof(T));
+            return c;
+        }
+
+        public void Test1<T>(T? x, T? y) where T : struct
+        {
+
         }
     }
 
-    public class Class2:Class1
+    public class Class2 : Class1
     {
         public new void Calculate() { }
     }
-    
+
 
 }
